@@ -1,0 +1,35 @@
+ここでは簡単にreStructedTextに関して説明いたします。
+
+と言っても、このページを見れば大まかな事はわかります。
+
+`はやわかり reStructuredText`<http://www.planewave.org/translations/rst/quickref.html>_
+
+
+テキストエディタ「Atom」でreStructuerdTextの編集
+===================================================
+
+しかし、reStructuerdTextを、Windows標準のメモ帳で編集するのは少々骨が折れるので、
+高橋はAtomとそのパッケージの利用をオススメします。
+
+Atomのインストール
+-----------------------
+
+Atomの公式ページのトップページからダウンロード可能です。
+
+`Atom`<https://atom.io/>_
+
+ダウンロードが終わったらインストールしましょう。
+
+reStructedTextを触る時に便利なパッケージ
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+この章ではreStructuredTextを触る時に便利なパッケージを列挙していきます。
+
+Atomの設定画面から「インストール」を選択し、パッケージを検索してみてください。
+
++ language-restructuredtext
++ file-icon
++ autocomplete-paths
++ markdown-table-formatter
++ tabs-to-space
++ git-plus
