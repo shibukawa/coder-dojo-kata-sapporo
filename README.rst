@@ -37,4 +37,4 @@ This document is `CC BY-NC-SA 4.0`_ license.
 
 参考資料
 ============================
-_`CC BY-NC-SA 4.0`: https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ja
+.. _`CC BY-NC-SA 4.0`: https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ja
