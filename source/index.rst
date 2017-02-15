@@ -10,7 +10,23 @@ Welcome to Coder Dojo Sapporo Kata's documentation!
    :maxdepth: 2
    :caption: Contents:
 
+このドキュメントについて
+--------------------------
 
+このドキュメントは、Coder Dojo Sapporoで使用予定のKata（教材）になります。
+
+参考資料
+--------------------
+
++ CoderDojo_
++ `CoderDojo Japan`_
++ `Kata (道場情報まとめ) - CoderDojo Japan`_
++ `CoderDojo Sapporo`_
+
+.. _CoderDojo: https://coderdojo.com/
+.. _`CoderDojo Japan`: https://www.coderdojo.jp/
+.. _`Kata (道場情報まとめ) - CoderDojo Japan`: https://coderdojo.jp/kata
+.. _`CoderDojo Sapporo`: http://coderdojo-sapporo.jp/
 
 Indices and tables
 ==================

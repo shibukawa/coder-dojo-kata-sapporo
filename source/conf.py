@@ -47,7 +47,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = 'Coder Dojo Sapporo Kata'
-copyright = '2017, TAKAHASHI Hidetsugu'
+copyright = 'CC BY-NC-SA 2017, TAKAHASHI Hidetsugu'
 author = 'TAKAHASHI Hidetsugu'
 
 # The version info for the project you're documenting, acts as replacement for
@@ -175,4 +175,5 @@ epub_copyright = copyright
 # A list of files that should not be packed into the epub file.
 epub_exclude_files = ['search.html']
 
-
+def setup(app):
+    app.add_stylesheet('background.css')
