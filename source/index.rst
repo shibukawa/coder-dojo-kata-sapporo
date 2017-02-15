@@ -10,6 +10,8 @@ Welcome to Coder Dojo Sapporo Kata's documentation!
    :maxdepth: 2
    :caption: Contents:
 
+   python/game_menter
+
 このドキュメントについて
 --------------------------
 
