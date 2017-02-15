@@ -6,16 +6,16 @@
 Welcome to Coder Dojo Sapporo Kata's documentation!
 ===================================================
 
+このドキュメントについて
+--------------------------
+
+このドキュメントは、Coder Dojo Sapporoで使用予定のKata（教材）になります。
+
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
 
    python/game_menter
-
-このドキュメントについて
---------------------------
-
-このドキュメントは、Coder Dojo Sapporoで使用予定のKata（教材）になります。
 
 参考資料
 --------------------
