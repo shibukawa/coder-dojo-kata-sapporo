@@ -22,11 +22,11 @@ This document is `CC BY-NC-SA 4.0`_ license.
 「ここが間違っています（もしくは適していません）変更させてください
 ================================================================
 
-このドキュメントはSphinxというドキュメンテーションツールを使用しています。
+このドキュメントは Sphinx_ というドキュメンテーションツールを使用しています。
 
-それに伴い、テキストソースはreStructuredTextを採用しております。
+それに伴い、テキストソースは reStructuredText を採用しております。
 
-また、バージョン管理にgitを利用しております。
+また、バージョン管理に git_ を利用しております。
 
 | 簡単な文法なので、gitで一度cloneし、ブランチを切り、ソースを編集し、プルリクエストを投げてください。
 | もし言っている意味が分からないということであれば、このリポジトリのWikiに詳細を掲載する予定ですので、
@@ -35,6 +35,7 @@ This document is `CC BY-NC-SA 4.0`_ license.
 | P.S.
 | ニンジャからのプルリクエストも歓迎しております。
 
-参考資料
-============================
+.. _Sphinx: http://www.sphinx-doc.org/ja/stable/
+.. _reStructuredText: http://docutils.sphinx-users.jp/docutils/docs/index.html
+.. _git: https://git-scm.com/
 .. _`CC BY-NC-SA 4.0`: https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ja
