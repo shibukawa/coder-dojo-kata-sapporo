@@ -183,6 +183,90 @@
 </ul>
 </div>
 </div>
+<div class="section" id="pc">
+<h4>スプライトを作る - まずはプレイヤー・キャラクター（以下:PC）から<a class="headerlink" href="#pc" title="このヘッドラインへのパーマリンク">¶</a></h4>
+<p>それでは画面を真っ黒にできたら、PCのスプライトを作りましょう。</p>
+<div class="admonition note">
+<p class="first admonition-title">注釈</p>
+<p class="last">スプライトという単語で反応したNinjaは、なかなかのScrach使いとみた。</p>
+</div>
+<p>といっても簡単で、素材ファイルがあれば以下の行を追加するだけです。</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># 背景透過が必要ないとき</span>
+<span class="n">pc_img</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;読み込みたいイメージファイル&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">convert</span><span class="p">()</span>
+
+<span class="c1"># 背景透過が必要なとき</span>
+<span class="n">pc_img</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;読み込みたいイメージファイル&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">convert_alpha</span><span class="p">()</span>
+<span class="c1"># 背景色を指定していても、背景が透明にならない場合について</span>
+<span class="n">pc_img</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;読み込みたいイメージファイル&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">convert</span><span class="p">()</span>
+<span class="n">colorkey</span> <span class="o">=</span> <span class="n">pc_img</span><span class="o">.</span><span class="n">get_at</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span> <span class="c1">#左上の色を透明色に</span>
+<span class="n">pc_img</span> <span class="o">=</span> <span class="n">set_colorkey</span><span class="p">(</span><span class="n">colorkey</span><span class="p">,</span> <span class="n">RLEACCEL</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>ですがここではあえてPygameの機能を使って図形を描画してスプライトを作成することにします。</p>
+<div class="admonition note">
+<p class="first admonition-title">注釈</p>
+<p class="last">消して素材ファイルを準備するのが面倒とかではない。いや、嘘です。</p>
+</div>
+<p>といっても、特段難しいことでは無いはずです。英語が読めればさらにささっとやることはわかります。
+Pygameのドキュメントの <a class="reference external" href="http://www.pygame.org/docs/ref/draw.html">pygame.drow</a> のページを見ると、詳しいことはわかります。</p>
+<p>ということでさくっと真っ黒な画面に赤い凸型を描いてみましょう。</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>   <span class="c1">#!/usr/bin/env python3</span>
+
+   <span class="kn">import</span> <span class="nn">pygame</span><span class="o">,</span> <span class="nn">math</span>
+   <span class="kn">from</span> <span class="nn">pygame.locals</span> <span class="kn">import</span> <span class="o">*</span>
+   <span class="kn">import</span> <span class="nn">sys</span>
+
+   <span class="n">RECT_SIZE</span> <span class="o">=</span> <span class="n">Rect</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">800</span><span class="p">,</span> <span class="mi">600</span><span class="p">)</span> <span class="c1"># スクリーンサイズ(px指定)</span>
+
+   <span class="c1"># PCのスプライト（クラス）を作る</span>
+<span class="k">class</span> <span class="nc">PCSprite</span><span class="p">(</span><span class="n">pygame</span><span class="o">.</span><span class="n">sprite</span><span class="o">.</span><span class="n">Sprite</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">surface</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+        <span class="n">pygame</span><span class="o">.</span><span class="n">sprite</span><span class="o">.</span><span class="n">Sprite</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">surface</span> <span class="o">=</span> <span class="n">surface</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">image</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">draw</span><span class="o">.</span><span class="n">polygon</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">surface</span><span class="p">,(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+        <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">30</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">15</span><span class="p">),(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">15</span><span class="p">),</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">30</span><span class="p">),</span> <span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">),</span> <span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">15</span><span class="p">),</span> <span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="mi">15</span><span class="p">),</span> <span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="mi">30</span><span class="p">)],</span>
+        <span class="mi">5</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># 画面からはみ出ないようにする</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rect</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">clamp</span><span class="p">(</span><span class="n">RECT_SIZE</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">draw</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">screen</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">image</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">pygame</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+    <span class="n">fps</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">Clock</span><span class="p">()</span>
+    <span class="n">screen</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">set_mode</span><span class="p">(</span><span class="n">RECT_SIZE</span><span class="o">.</span><span class="n">size</span><span class="p">)</span>
+    <span class="n">pygame</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">set_caption</span><span class="p">(</span><span class="s2">&quot;線だけシューティング&quot;</span><span class="p">)</span>
+
+    <span class="c1"># スプライト作成</span>
+    <span class="n">MyPC</span> <span class="o">=</span> <span class="n">PCSprite</span><span class="p">(</span><span class="n">screen</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+
+    <span class="c1"># ゲームイベントループ</span>
+    <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+        <span class="n">screen</span><span class="o">.</span><span class="n">fill</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+        <span class="n">fps</span><span class="o">.</span><span class="n">tick</span><span class="p">(</span><span class="mi">60</span><span class="p">)</span>
+
+        <span class="c1"># スプライト更新</span>
+        <span class="n">MyPC</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
+
+        <span class="c1"># スプライトを描画</span>
+        <span class="n">MyPC</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">screen</span><span class="p">)</span>
+
+        <span class="n">pygame</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">update</span><span class="p">()</span> <span class="c1"># 画面を更新</span>
+
+        <span class="c1"># イベント処理</span>
+        <span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">pygame</span><span class="o">.</span><span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">QUIT</span><span class="p">:</span> <span class="c1"># 終了イベント</span>
+                <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">警告</p>
+<p>このソースコードは正常に動きません。</p>
+<p class="last">具体的にはスプライトが描画されず、PCがひょうじされません。</p>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -207,6 +291,7 @@
 </li>
 <li><a class="reference internal" href="#id6">やってみよう</a><ul>
 <li><a class="reference internal" href="#id7">画面を表示する</a></li>
+<li><a class="reference internal" href="#pc">スプライトを作る - まずはプレイヤー・キャラクター（以下:PC）から</a></li>
 </ul>
 </li>
 </ul>

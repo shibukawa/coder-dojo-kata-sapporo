@@ -141,3 +141,95 @@ PyCharm Community Edition(任意)
 .. hint::
    + *fill* というのは「塗る」という意味です。
    + コンピューターでは基本的に、赤・緑・青の光の三原色で色を記録します。
+
+
+スプライトを作る - まずはプレイヤー・キャラクター（以下:PC）から
+------------------------------------------------------------------------------
+
+それでは画面を真っ黒にできたら、PCのスプライトを作りましょう。
+
+.. note::
+ スプライトという単語で反応したNinjaは、なかなかのScrach使いとみた。
+
+といっても簡単で、素材ファイルがあれば以下の行を追加するだけです。
+
+.. code-block:: python
+
+ # 背景透過が必要ないとき
+ pc_img = pygame.image.load("読み込みたいイメージファイル").convert()
+
+ # 背景透過が必要なとき
+ pc_img = pygame.image.load("読み込みたいイメージファイル").convert_alpha()
+ # 背景色を指定していても、背景が透明にならない場合について
+ pc_img = pygame.image.load("読み込みたいイメージファイル").convert()
+ colorkey = pc_img.get_at((0, 0)) #左上の色を透明色に
+ pc_img = set_colorkey(colorkey, RLEACCEL)
+
+ですがここではあえてPygameの機能を使って図形を描画してスプライトを作成することにします。
+
+.. note::
+ 消して素材ファイルを準備するのが面倒とかではない。いや、嘘です。
+
+といっても、特段難しいことでは無いはずです。英語が読めればさらにささっとやることはわかります。
+Pygameのドキュメントの `pygame.drow`_ のページを見ると、詳しいことはわかります。
+
+ということでさくっと真っ黒な画面に赤い凸型を描いてみましょう。
+
+.. _`pygame.drow`: http://www.pygame.org/docs/ref/draw.html
+
+.. code-block:: python
+
+    #!/usr/bin/env python3
+
+    import pygame, math
+    from pygame.locals import *
+    import sys
+
+    RECT_SIZE = Rect(0, 0, 800, 600) # スクリーンサイズ(px指定)
+
+    # PCのスプライト（クラス）を作る
+ class PCSprite(pygame.sprite.Sprite):
+     def __init__(self, surface, x, y):
+         pygame.sprite.Sprite.__init__(self)
+         self.surface = surface
+         self.image = pygame.draw.polygon(self.surface,(255, 0, 0),
+         [(0, 30), (0, 15),(10, 15), (10, 30), (20, 30), (20, 15), (30, 15), (30, 30)],
+         5)
+
+     def update(self):
+         # 画面からはみ出ないようにする
+         self.rect = self.image.clamp(RECT_SIZE)
+     def draw(self, screen):
+         self.image
+
+ if __name__ == '__main__':
+     pygame.init()
+     fps = pygame.time.Clock()
+     screen = pygame.display.set_mode(RECT_SIZE.size)
+     pygame.display.set_caption("線だけシューティング")
+
+     # スプライト作成
+     MyPC = PCSprite(screen, 100, 100)
+
+     # ゲームイベントループ
+     while True:
+         screen.fill((0, 0, 0))
+         fps.tick(60)
+
+         # スプライト更新
+         MyPC.update()
+
+         # スプライトを描画
+         MyPC.draw(screen)
+
+         pygame.display.update() # 画面を更新
+
+         # イベント処理
+         for event in pygame.event.get():
+             if event.type == QUIT: # 終了イベント
+                 sys.exit()
+
+.. warning::
+    このソースコードは正常に動きません。
+
+    具体的にはスプライトが描画されず、PCがひょうじされません。
