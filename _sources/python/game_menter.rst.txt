@@ -165,51 +165,46 @@ PyCharm Community Edition(任意)
  colorkey = pc_img.get_at((0, 0)) #左上の色を透明色に
  pc_img = set_colorkey(colorkey, RLEACCEL)
 
-ですがここではあえてPygameの機能を使って図形を描画してスプライトを作成することにします。
+ここでは以下の素材を使いましょう。
 
-.. note::
- 消して素材ファイルを準備するのが面倒とかではない。いや、嘘です。
-
-といっても、特段難しいことでは無いはずです。英語が読めればさらにささっとやることはわかります。
-Pygameのドキュメントの `pygame.drow`_ のページを見ると、詳しいことはわかります。
-
-ということでさくっと真っ黒な画面に赤い凸型を描いてみましょう。
-
-.. _`pygame.drow`: http://www.pygame.org/docs/ref/draw.html
+.. image:: img/game/pc_img.png
+   :alt: プレイヤー・キャラクター
 
 .. code-block:: python
 
-    #!/usr/bin/env python3
+ import pygame, math
+ from pygame.locals import *
+ import sys
 
-    import pygame, math
-    from pygame.locals import *
-    import sys
+ SCR_RECT = Rect(0, 0, 800, 600) # スクリーンサイズ(px指定)
 
-    RECT_SIZE = Rect(0, 0, 800, 600) # スクリーンサイズ(px指定)
-
-    # PCのスプライト（クラス）を作る
+ # PCのスプライト（クラス）を作る
  class PCSprite(pygame.sprite.Sprite):
-     def __init__(self, surface, x, y):
+     def __init__(self, filename, x, y, vx, vy):
          pygame.sprite.Sprite.__init__(self)
-         self.surface = surface
-         self.image = pygame.draw.polygon(self.surface,(255, 0, 0),
-         [(0, 30), (0, 15),(10, 15), (10, 30), (20, 30), (20, 15), (30, 15), (30, 30)],
-         5)
+         self.image = pygame.image.load(filename).convert_alpha()
+         width = self.image.get_width()
+         height = self.image.get_height()
+         self.rect = Rect(x, y, width, height)
+         self.vx = vx
+         self.vy = vy
 
      def update(self):
          # 画面からはみ出ないようにする
-         self.rect = self.image.clamp(RECT_SIZE)
+         self.rect = self.rect.clamp(SCR_RECT)
      def draw(self, screen):
-         self.image
+         screen.blit(self.image, self.rect)
 
  if __name__ == '__main__':
      pygame.init()
-     fps = pygame.time.Clock()
-     screen = pygame.display.set_mode(RECT_SIZE.size)
+     screen = pygame.display.set_mode(SCR_RECT.size)
      pygame.display.set_caption("線だけシューティング")
 
      # スプライト作成
-     MyPC = PCSprite(screen, 100, 100)
+     MyPC = PCSprite("pc_img.png", 400, 500, 100, 100)
+
+     # 画面の更新時間を管理するオブジェクト
+     fps = pygame.time.Clock()
 
      # ゲームイベントループ
      while True:
@@ -228,8 +223,3 @@ Pygameのドキュメントの `pygame.drow`_ のページを見ると、詳し�
          for event in pygame.event.get():
              if event.type == QUIT: # 終了イベント
                  sys.exit()
-
-.. warning::
-    このソースコードは正常に動きません。
-
-    具体的にはスプライトが描画されず、PCがひょうじされません。
