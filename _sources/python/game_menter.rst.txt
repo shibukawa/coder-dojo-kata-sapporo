@@ -1,5 +1,5 @@
 ========================================================
-Pythonでゲームを作りますが、何が of Python3 for Menter
+Pythonでゲームを作りますが、何か of Python3
 ========================================================
 
 目的
@@ -118,7 +118,7 @@ PyCharm Community Edition(任意)
  # SCREEN_SIZEの画面作成
  screen = pygame.display.set_mode(SCREEN_SIZE)
  # タイトルバーの文字列セット
- pygame.display.set_caption("線だけシューティング")
+ pygame.display.set_caption("プチプチシューティング")
 
  # ゲームイベントループ
  while True:
@@ -126,8 +126,8 @@ PyCharm Community Edition(任意)
   pygame.display.update() # 画面を更新
   # イベント処理
   for event in pygame.event.get():
-  if event.type == QUIT: # 終了イベント
-   sys.exit()
+      if event.type == QUIT: # 終了イベント
+         sys.exit()
 
 このコードを書いたら、名前を ``game.py`` として保存し、コマンドでファイルの保存したディレクトリまで移動して、
 ``python game.py`` と実行してみましょう。
@@ -141,12 +141,27 @@ PyCharm Community Edition(任意)
 .. hint::
    + *fill* というのは「塗る」という意味です。
    + コンピューターでは基本的に、赤・緑・青の光の三原色で色を記録します。
+   + 勇気のあるNinjaは、上のソースコードの以下の部分を消して実行してみよう！　しかし危険が伴うぞ！::
+       for event in pygame.event.get():
+           if event.type == QUIT: #終了イベント
+               sys.exit()
+
+.. warning::
+   「ヒント」の一番最後は、プログラムを終了させなくする技なので、Mentorの皆様、および先輩Ninjaは
+   強制終了の方法を伝えておくこと。
+
+.. note::
+   importってなんですか？
+     ライブラリやモジュールというものを読み込んでいます。ライブラリというのは、簡単に言えば説明書です。
+     説明書を渡して、いまあなたが触っているPythonという言語が、画面を表示したりする方法を会得しています。
+     また、モジュールというのは、別のプログラムのことを言います。プログラムはバラバラに分解して作ることが
+     できるんですよ。
 
 
-スプライトを作る - まずはプレイヤー・キャラクター（以下:PC）から
-------------------------------------------------------------------------------
+スプライトを作る
+-------------------------
 
-それでは画面を真っ黒にできたら、PCのスプライトを作りましょう。
+それでは画面を真っ黒にできたら、画面に表示するキャラクターのスプライトを作りましょう。
 
 .. note::
  スプライトという単語で反応したNinjaは、なかなかのScrach使いとみた。
@@ -170,6 +185,8 @@ PyCharm Community Edition(任意)
 .. image:: img/game/pc_img.png
    :alt: プレイヤー・キャラクター
 
+それでは、 ``game.py`` を以下のように書き換えましょう。
+
 .. code-block:: python
 
  import pygame, math
@@ -178,8 +195,8 @@ PyCharm Community Edition(任意)
 
  SCR_RECT = Rect(0, 0, 800, 600) # スクリーンサイズ(px指定)
 
- # PCのスプライト（クラス）を作る
- class PCSprite(pygame.sprite.Sprite):
+ # キャラクターのスプライト（クラス）を作る
+ class CharacterSprite(pygame.sprite.Sprite):
      def __init__(self, filename, x, y, vx, vy):
          pygame.sprite.Sprite.__init__(self)
          self.image = pygame.image.load(filename).convert_alpha()
@@ -198,7 +215,97 @@ PyCharm Community Edition(任意)
  if __name__ == '__main__':
      pygame.init()
      screen = pygame.display.set_mode(SCR_RECT.size)
-     pygame.display.set_caption("線だけシューティング")
+     pygame.display.set_caption("プチプチシューティング")
+
+     # スプライト作成
+     MyPC = CharacterSprite("pc_img.png", 400, 500, 100, 100)
+
+     # 画面の更新時間を管理するオブジェクト
+     fps = pygame.time.Clock()
+
+     # ゲームイベントループ
+     while True:
+         screen.fill((0, 0, 0))
+         fps.tick(60)
+
+         # スプライト更新
+         MyPC.update()
+
+         # スプライトを描画
+         MyPC.draw(screen)
+
+         pygame.display.update() # 画面を更新
+
+         # イベント処理
+         for event in pygame.event.get():
+             if event.type == QUIT: # 終了イベント
+                 sys.exit()
+
+難しいことは抜きにすると、class（クラス）というのはScratchでいうところの *スプライト* 、
+プログラミンでいうところの *絵* です。
+そしてdefという単語で始まっているのは **メソッド** と呼ばれるもので、これはScratchの
+*ブロックを作る* に近いです。
+
+さて、実行するとこんな画面が出てくると思います。
+
+.. image:: img/game/002.png
+    :alt: 画面はそれっぽいぞ。
+
+| 「しかし面倒な書き方してるなあ」
+| そう思ったNinjaは、後々この書き方をしていてよかったと思えるようになるはず。
+
+
+「俺はこれから本気出す」 - プレイヤー・キャラクター、動く。
+--------------------------------------------------------------------------
+
+さて、せっかく出した画像なので、動かしたいですよね。できれば自分の思ったとおりに。
+
+もちろんゲームなので、キーボードに反応して動いてくれないとつまらないですね。
+ということでここからはそれを作っていきます。
+
+同じく ``game.py`` を以下のように書き換えましょう。
+
+.. code-block:: python
+
+ import pygame, math
+ from pygame.locals import *
+ import sys
+
+ SCR_RECT = Rect(0, 0, 800, 600) # スクリーンサイズ(px指定)
+
+ # キャラクターのスプライト（クラス）を作る
+ class CharacterSprite(pygame.sprite.Sprite):
+     def __init__(self, filename, x, y, vx, vy):
+         pygame.sprite.Sprite.__init__(self)
+         self.image = pygame.image.load(filename).convert_alpha()
+         width = self.image.get_width()
+         height = self.image.get_height()
+         self.rect = Rect(x, y, width, height)
+         self.vx = vx
+         self.vy = vy
+
+     def update(self):
+         # 画面からはみ出ないようにする
+         self.rect = self.rect.clamp(SCR_RECT)
+     def draw(self, screen):
+         screen.blit(self.image, self.rect)
+
+ # プレイヤーのスプライト（クラス）を作る
+ class PCSprite(CharacterSprite):
+     def move(self, press):
+         if press[K_LEFT]:
+             self.rect.move_ip(-self.vx, 0)
+         if press[K_RIGHT]:
+             self.rect.move_ip(self.vx, 0)
+         if press[K_UP]:
+             self.rect.move_ip(0, -self.vy)
+         if press[K_DOWN]:
+             self.rect.move_ip(0, self.vy)
+
+ if __name__ == '__main__':
+     pygame.init()
+     screen = pygame.display.set_mode(SCR_RECT.size)
+     pygame.display.set_caption("プチプチシューティング")
 
      # スプライト作成
      MyPC = PCSprite("pc_img.png", 400, 500, 100, 100)
@@ -223,3 +330,8 @@ PyCharm Community Edition(任意)
          for event in pygame.event.get():
              if event.type == QUIT: # 終了イベント
                  sys.exit()
+             if event.type == KEYDOWN:
+                 if event.key == K_ESCAPE:
+                     sys.exit()
+                 pressed_keys = pygame.key.get_pressed()
+                 MyPC.move(pressed_keys)
