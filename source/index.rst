@@ -16,6 +16,8 @@ Welcome to Coder Dojo Sapporo Kata's documentation!
    :caption: Contents:
 
    python/game_menter
+   tips/git
+   tips/programmer_friends
 
 参考資料
 --------------------
