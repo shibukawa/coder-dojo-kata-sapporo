@@ -34,7 +34,6 @@ Pythonでゲームを作りますが、何か of Python3
 + Python3 (Windows, Mac, Linux)
 + Pygame
 + Pythonのソースコードが編集できるエディタ（Atom推奨。PyCharmでも可）
-+ （できれば）ゲームに使う画像・音楽素材。
 
 カリキュラム（？）
 ========================
@@ -48,7 +47,7 @@ Pythonでゲームを作りますが、何か of Python3
     03_make_sprite
     04_inherich
     05_move_enemy
-    06_razor.rst
+    06_lazer
     07_game_status
     08_file_separate
     09_epilogue

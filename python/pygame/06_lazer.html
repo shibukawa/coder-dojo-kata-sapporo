@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>色々ゲームにする。 - タイトル画面・ゲームオーバー画面・得点表示 &#8212; Coder Dojo Sapporo Kata 0.1.0 ドキュメント</title>
+    <title>「これを使えっ！」 - プレイヤーキャラクター、レーザーを放つ。 &#8212; Coder Dojo Sapporo Kata 0.1.0 ドキュメント</title>
     
     <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -28,8 +28,6 @@
     <script type="text/javascript" src="../../_static/translations.js"></script>
     <link rel="index" title="索引" href="../../genindex.html" />
     <link rel="search" title="検索" href="../../search.html" />
-    <link rel="next" title="最後の大掃除 - ソースを綺麗に、分割しちゃうぞ！" href="08_file_separate.html" />
-    <link rel="prev" title="「こいつら、動くぞ？！」 - 敵を表示させて動かしてみる。" href="05_move_enemy.html" />
    
   <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
   
@@ -46,12 +44,17 @@
           <div class="body" role="main">
             
   <div class="section" id="id1">
-<h1>色々ゲームにする。 - タイトル画面・ゲームオーバー画面・得点表示<a class="headerlink" href="#id1" title="このヘッドラインへのパーマリンク">¶</a></h1>
+<h1>「これを使えっ！」 - プレイヤーキャラクター、レーザーを放つ。<a class="headerlink" href="#id1" title="このヘッドラインへのパーマリンク">¶</a></h1>
 <div class="section" id="id2">
 <h2>まえがき<a class="headerlink" href="#id2" title="このヘッドラインへのパーマリンク">¶</a></h2>
-<p>さて、ここまで作ったゲーム。何か色々足りないと思わないか？</p>
-<p>筆者はねえ、「タイトル画面」と「ゲームオーバー画面」と「得点表示」が無いことに気づいちゃったんだよ。</p>
-<p>ということでここからは全力疾走で実装していくぞ、皆ついてこれるかな？</p>
+<p>ということで君にはこのレーザーを渡そう。</p>
+<img alt="なんも変哲もない黄色い棒" src="../../_images/lazer.png" />
+<div class="line-block">
+<div class="line">え、なに？</div>
+<div class="line">「この画像を入れれば奴らを一掃できるんですね？」</div>
+<div class="line">だって？</div>
+</div>
+<p>何言ってるんだよ。これからそれを実装するんだよ。</p>
 </div>
 <div class="section" id="id3">
 <h2>ソースコード<a class="headerlink" href="#id3" title="このヘッドラインへのパーマリンク">¶</a></h2>
@@ -280,64 +283,12 @@
 223
 224
 225
-226
-227
-228
-229
-230
-231
-232
-233
-234
-235
-236
-237
-238
-239
-240
-241
-242
-243
-244
-245
-246
-247
-248
-249
-250
-251
-252
-253
-254
-255
-256
-257
-258
-259
-260
-261
-262
-263
-264
-265
-266
-267
-268
-269
-270
-271
-272
-273
-274
-275
-276
-277</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pygame</span><span class="o">,</span> <span class="nn">math</span>
+226</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pygame</span><span class="o">,</span> <span class="nn">math</span>
 <span class="kn">from</span> <span class="nn">pygame.locals</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="kn">import</span> <span class="nn">random</span>
 <span class="kn">import</span> <span class="nn">sys</span>
 <span class="kn">import</span> <span class="nn">re</span>
 
-<span class="n">GAME_MODE</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;START&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;PLAY&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;GAMEOVER&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">}</span>
 <span class="n">SCR_RECT</span> <span class="o">=</span> <span class="n">Rect</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">800</span><span class="p">,</span> <span class="mi">600</span><span class="p">)</span> <span class="c1"># スクリーンサイズ(px指定)</span>
 
 <span class="k">class</span> <span class="nc">Game</span><span class="p">:</span>
@@ -374,8 +325,6 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        ゲームオブジェクトを初期化</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="c1"># ゲームの状態</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">game_state</span> <span class="o">=</span> <span class="n">GAME_MODE</span><span class="p">[</span><span class="s1">&#39;START&#39;</span><span class="p">]</span>
         <span class="c1"># スプライトグループを作成して登録</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">all_sprite</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">sprite</span><span class="o">.</span><span class="n">RenderUpdates</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">pc</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">sprite</span><span class="o">.</span><span class="n">Group</span><span class="p">()</span> <span class="c1"># HACK: 違和感あるけど、プレイヤーキャラクターグループ</span>
@@ -387,64 +336,24 @@
         <span class="n">Razor</span><span class="o">.</span><span class="n">containers</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">all_sprite</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">razors</span>
         <span class="c1"># プレイヤーを作成</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">player</span> <span class="o">=</span> <span class="n">Player</span><span class="p">()</span>
-        <span class="c1"># スコア初期化</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">score</span> <span class="o">=</span> <span class="mi">0</span>
 
     <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        情報の更新と敵の出現管理</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">game_state</span> <span class="o">==</span> <span class="n">GAME_MODE</span><span class="p">[</span><span class="s1">&#39;PLAY&#39;</span><span class="p">]:</span>
-            <span class="c1"># 0からenemy_probまでの乱数を出して、0が出たらエネミー出現</span>
-            <span class="c1"># つまりこのクラスの変数enemy_probを大きくすると……</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="n">random</span><span class="o">.</span><span class="n">randrange</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">enemy_prob</span><span class="p">):</span>
-                <span class="n">Enemy</span><span class="p">()</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">all_sprite</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">collision_detection</span><span class="p">()</span>
+        <span class="c1"># 0からenemy_probまでの乱数を出して、0が出たらエネミー出現</span>
+        <span class="c1"># つまりこのクラスの変数enemy_probを大きくすると……</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">random</span><span class="o">.</span><span class="n">randrange</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">enemy_prob</span><span class="p">):</span>
+            <span class="n">Enemy</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">all_sprite</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">collision_detection</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">draw</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">screen</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        描画</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">screen</span><span class="o">.</span><span class="n">fill</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">game_state</span> <span class="o">==</span> <span class="n">GAME_MODE</span><span class="p">[</span><span class="s1">&#39;START&#39;</span><span class="p">]:</span>
-            <span class="c1"># タイトル画面描画</span>
-            <span class="n">title_font</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">font</span><span class="o">.</span><span class="n">SysFont</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="mi">80</span><span class="p">)</span>
-            <span class="n">title</span> <span class="o">=</span> <span class="n">title_font</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="s1">&#39;Puchi Puchi Shooting&#39;</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">128</span><span class="p">))</span>
-            <span class="n">screen</span><span class="o">.</span><span class="n">blit</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="p">((</span><span class="n">SCR_RECT</span><span class="o">.</span><span class="n">width</span> <span class="o">-</span> <span class="n">title</span><span class="o">.</span><span class="n">get_width</span><span class="p">())</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">200</span><span class="p">))</span>
-            <span class="c1"># エネミーのみ描画</span>
-            <span class="n">enemy_image</span> <span class="o">=</span> <span class="n">Enemy</span><span class="o">.</span><span class="n">image</span>
-            <span class="n">screen</span><span class="o">.</span><span class="n">blit</span><span class="p">(</span><span class="n">enemy_image</span><span class="p">,</span> <span class="p">((</span><span class="n">SCR_RECT</span><span class="o">.</span><span class="n">width</span> <span class="o">-</span> <span class="n">enemy_image</span><span class="o">.</span><span class="n">get_width</span><span class="p">())</span><span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">300</span><span class="p">))</span>
-            <span class="c1"># PUSH SPACE KEYを描画</span>
-            <span class="n">push_font</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">font</span><span class="o">.</span><span class="n">SysFont</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="mi">40</span><span class="p">)</span>
-            <span class="n">push_space</span> <span class="o">=</span> <span class="n">push_font</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="s2">&quot;PUSH SPACE KEY&quot;</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">))</span>
-            <span class="n">screen</span><span class="o">.</span><span class="n">blit</span><span class="p">(</span><span class="n">push_space</span><span class="p">,</span> <span class="p">((</span><span class="n">SCR_RECT</span><span class="o">.</span><span class="n">width</span> <span class="o">-</span> <span class="n">push_space</span><span class="o">.</span><span class="n">get_width</span><span class="p">())</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">400</span><span class="p">))</span>
-            <span class="c1"># クレジット描画</span>
-            <span class="n">credit_font</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">font</span><span class="o">.</span><span class="n">SysFont</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
-            <span class="n">credit</span> <span class="o">=</span> <span class="n">credit_font</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="s1">&#39;2017 CoderDojo Sapporo&#39;</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">))</span>
-            <span class="n">screen</span><span class="o">.</span><span class="n">blit</span><span class="p">(</span><span class="n">credit</span><span class="p">,</span> <span class="p">((</span><span class="n">SCR_RECT</span><span class="o">.</span><span class="n">width</span> <span class="o">-</span> <span class="n">credit</span><span class="o">.</span><span class="n">get_width</span><span class="p">())</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">600</span><span class="p">))</span>
-
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">game_state</span> <span class="o">==</span> <span class="n">GAME_MODE</span><span class="p">[</span><span class="s1">&#39;PLAY&#39;</span><span class="p">]:</span>
-            <span class="c1"># ゲームプレイ</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">all_sprite</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">screen</span><span class="p">)</span>
-            <span class="c1"># 得点表示</span>
-            <span class="n">score_font</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">font</span><span class="o">.</span><span class="n">SysFont</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="mi">80</span><span class="p">)</span>
-            <span class="n">score</span> <span class="o">=</span> <span class="n">score_font</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="s2">&quot;{0:0&gt;4d}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">score</span><span class="p">),</span> <span class="bp">False</span><span class="p">,</span> <span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">))</span>
-            <span class="n">screen</span><span class="o">.</span><span class="n">blit</span><span class="p">(</span><span class="n">score</span><span class="p">,</span> <span class="p">(</span><span class="n">SCR_RECT</span><span class="o">.</span><span class="n">left</span><span class="p">,</span> <span class="n">SCR_RECT</span><span class="o">.</span><span class="n">top</span><span class="p">))</span>
-
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">game_state</span> <span class="o">==</span> <span class="n">GAME_MODE</span><span class="p">[</span><span class="s1">&#39;GAMEOVER&#39;</span><span class="p">]:</span>
-            <span class="c1"># GAME OVERを描画</span>
-            <span class="n">gameover_font</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">font</span><span class="o">.</span><span class="n">SysFont</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="mi">80</span><span class="p">)</span>
-            <span class="n">gameover</span> <span class="o">=</span> <span class="n">gameover_font</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="s2">&quot;GAME OVER&quot;</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
-            <span class="n">screen</span><span class="o">.</span><span class="n">blit</span><span class="p">(</span><span class="n">gameover</span><span class="p">,</span> <span class="p">((</span><span class="n">SCR_RECT</span><span class="o">.</span><span class="n">width</span> <span class="o">-</span> <span class="n">gameover</span><span class="o">.</span><span class="n">get_width</span><span class="p">())</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">200</span><span class="p">))</span>
-            <span class="c1"># PUSH STARTを描画</span>
-            <span class="n">push_font</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">font</span><span class="o">.</span><span class="n">SysFont</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="mi">40</span><span class="p">)</span>
-            <span class="n">push_space</span> <span class="o">=</span> <span class="n">push_font</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="s2">&quot;PUSH SPACE KEY&quot;</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">))</span>
-            <span class="n">screen</span><span class="o">.</span><span class="n">blit</span><span class="p">(</span><span class="n">push_space</span><span class="p">,</span> <span class="p">((</span><span class="n">SCR_RECT</span><span class="o">.</span><span class="n">width</span> <span class="o">-</span> <span class="n">push_space</span><span class="o">.</span><span class="n">get_width</span><span class="p">())</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">400</span><span class="p">))</span>
-            <span class="c1"># 得点表示</span>
-            <span class="n">score_font</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">font</span><span class="o">.</span><span class="n">SysFont</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="mi">80</span><span class="p">)</span>
-            <span class="n">score</span> <span class="o">=</span> <span class="n">score_font</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="s2">&quot;You got {0:0&gt;4d} points!&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">score</span><span class="p">),</span> <span class="bp">False</span><span class="p">,</span> <span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">))</span>
-            <span class="n">screen</span><span class="o">.</span><span class="n">blit</span><span class="p">(</span><span class="n">score</span><span class="p">,</span> <span class="p">((</span><span class="n">SCR_RECT</span><span class="o">.</span><span class="n">width</span> <span class="o">-</span> <span class="n">score</span><span class="o">.</span><span class="n">get_width</span><span class="p">())</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">300</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">all_sprite</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">screen</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">collision_detection</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -454,11 +363,11 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">player_collided</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">sprite</span><span class="o">.</span><span class="n">groupcollide</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">enemies</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">pc</span><span class="p">,</span> <span class="bp">True</span><span class="p">,</span> <span class="bp">True</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">enemy</span> <span class="ow">in</span> <span class="n">player_collided</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">game_state</span> <span class="o">=</span> <span class="n">GAME_MODE</span><span class="p">[</span><span class="s2">&quot;GAMEOVER&quot;</span><span class="p">]</span>
+            <span class="c1"># FIXME: 仮実装。ゲームオーバー画面を本当は出すよ。</span>
+            <span class="n">pygame</span><span class="o">.</span><span class="n">quit</span><span class="p">()</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">()</span>
 
         <span class="n">razor_collided</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">sprite</span><span class="o">.</span><span class="n">groupcollide</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">enemies</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">razors</span><span class="p">,</span> <span class="bp">True</span><span class="p">,</span> <span class="bp">True</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">razor</span> <span class="ow">in</span> <span class="n">razor_collided</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">score</span> <span class="o">+=</span> <span class="mi">1</span>
 
 
     <span class="k">def</span> <span class="nf">load_images</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -475,16 +384,10 @@
             <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">QUIT</span><span class="p">:</span>
                 <span class="n">pygame</span><span class="o">.</span><span class="n">quit</span><span class="p">()</span>
                 <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">()</span>
-            <span class="k">elif</span> <span class="n">event</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">KEYDOWN</span> <span class="ow">and</span> <span class="n">event</span><span class="o">.</span><span class="n">key</span> <span class="o">==</span> <span class="n">K_ESCAPE</span><span class="p">:</span>
-                <span class="n">pygame</span><span class="o">.</span><span class="n">quit</span><span class="p">()</span>
-                <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">()</span>
-            <span class="k">elif</span> <span class="n">event</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">KEYDOWN</span> <span class="ow">and</span> <span class="n">event</span><span class="o">.</span><span class="n">key</span> <span class="o">==</span> <span class="n">K_SPACE</span><span class="p">:</span>
-                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">game_state</span> <span class="o">==</span> <span class="n">GAME_MODE</span><span class="p">[</span><span class="s1">&#39;START&#39;</span><span class="p">]:</span> <span class="c1"># スタート画面でスペースキーを押したらスタート</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">game_state</span> <span class="o">=</span> <span class="n">GAME_MODE</span><span class="p">[</span><span class="s1">&#39;PLAY&#39;</span><span class="p">]</span>
-                <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">game_state</span> <span class="o">==</span> <span class="n">GAME_MODE</span><span class="p">[</span><span class="s1">&#39;GAMEOVER&#39;</span><span class="p">]:</span> <span class="c1"># ゲームオーバー</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">init_game</span><span class="p">()</span> <span class="c1">#ゲームを初期化して再開</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">game_state</span> <span class="o">=</span> <span class="n">GAME_MODE</span><span class="p">[</span><span class="s1">&#39;PLAY&#39;</span><span class="p">]</span>
-
+            <span class="k">elif</span> <span class="n">event</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">KEYDOWN</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">key</span> <span class="o">==</span> <span class="n">K_ESCAPE</span><span class="p">:</span>
+                    <span class="n">pygame</span><span class="o">.</span><span class="n">quit</span><span class="p">()</span>
+                    <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">()</span>
 
 <span class="k">class</span> <span class="nc">Player</span><span class="p">(</span><span class="n">pygame</span><span class="o">.</span><span class="n">sprite</span><span class="o">.</span><span class="n">Sprite</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
@@ -522,7 +425,6 @@
                 <span class="n">Razor</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rect</span><span class="o">.</span><span class="n">center</span><span class="p">)</span><span class="c1"># 作成すると同時にall_spriteに追加される。</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">charge_timer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">charge</span>
 
-
 <span class="k">class</span> <span class="nc">Enemy</span><span class="p">(</span><span class="n">pygame</span><span class="o">.</span><span class="n">sprite</span><span class="o">.</span><span class="n">Sprite</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    エネミークラス</span>
@@ -550,7 +452,6 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">mov_vec</span> <span class="o">=</span> <span class="p">[(</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">speed</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">speed</span><span class="p">),</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">speed</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">speed</span><span class="p">)]</span> <span class="c1"># 上, 右, 下, 左の順で指定。</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">rect</span><span class="o">.</span><span class="n">move_ip</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">mov_vec</span><span class="p">))</span>
-
 
 <span class="k">class</span> <span class="nc">Razor</span><span class="p">(</span><span class="n">pygame</span><span class="o">.</span><span class="n">sprite</span><span class="o">.</span><span class="n">Sprite</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
@@ -613,79 +514,18 @@
 </div>
 <div class="section" id="id4">
 <h2>解説<a class="headerlink" href="#id4" title="このヘッドラインへのパーマリンク">¶</a></h2>
-<p>久々に全力疾走で実装したので、頭が息切れ起こしてるけど、ちゃんと解説するよ。</p>
-<p>今回一番上に追加したこれ。</p>
-<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">GAME_MODE</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;START&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;PLAY&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;GAMEOVER&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">}</span>
-</pre></div>
-</td></tr></table></div>
-<p>これは <strong>辞書型（じしょがた）</strong> というデータ形式でこれを上手く使いこなせると、
-数字ばっかりで制御しているプログラムの見通しが大分良くなるよ。</p>
+<p>さて、優秀なNinja諸君ならもう既にこのコードは大きな変更は無いことはおわかりだろう。敷いてあげるなら以下。</p>
+<ul class="simple">
+<li>Razorクラスの追加</li>
+<li>Razorのスプライトグループと当たり判定を追加</li>
+</ul>
+<p>後の細かいところはソースコードを読んで感じ取ってほしい。なんならプログラムを改造してみたって構わないぞ！</p>
 <div class="line-block">
 <div class="line">え？</div>
-<div class="line">「じゃあ文字で判定すればいいじゃないか」</div>
-<div class="line">って？</div>
+<div class="line">「本当にレーザー打てて、的に効くんだよな？」</div>
+<div class="line">って？　それは君の実装次第だよ。</div>
 </div>
-<p>甘い！　某雪のマークのコーヒー並に甘い！</p>
-<p>そのやり方には2つ問題がある。一つは <em>文字を打ち間違えた時が面倒くさい</em> という理由。
-もうひとつは <strong>コンピューターは文字の比較がむちゃくちゃ苦手</strong> という点だ。</p>
-<p>もっとも、最近のコンピューターは人間の音声を解釈してそれに対してリアルタイムで返答するくらいには、
-一見性能が上がっているが、その裏では文字列をコンピューターの中の文字の表から数字に直して、その数字で
-比較して……という、人間でも地味に面倒くさい事をやっている。</p>
-<p>ましてや音声となれば……ああ、まあ、こういうムダ話はここじゃなくて近くのメンターさんに聞いたほうがいいかもね。
-そもそも、実のこと言うとこのやり方が唯一無二で正しいという保証もどこにもない。</p>
-<p>閑話休題（かんわきゅうだい）</p>
-<p>今回追加した <code class="docutils literal"><span class="pre">GAME_MODE</span></code> 辞書を利用して、Gameクラスの中で動作を色々操ってるわけだね。</p>
-<hr class="docutils" />
-<p>そういえばここにきてやっと文字の表示ですよ。Ninja諸君。</p>
-<p>メンターさんがNinjaと同じくらいの歳の頃は、ターミナルやコマンドプロンプトの画面に <em>Hello world</em> って
-表示するのが初めてのプログラミングでなあ……え？　昔話はいいって？</p>
-<p>真面目な話、今そんなことを最初にできたところで、「つまらない」と思われると、この記事を書いてるメンターは悲しくなるから、
-いきなり画像を表示させたりしてみたわけですよ。</p>
-<div class="admonition note">
-<p class="first admonition-title">注釈</p>
-<dl class="docutils">
-<dt>Pythonではターミナルとかの画面に文字を表示するのは、::</dt>
-<dd>print(&#8216;Hello, world!&#8217;)</dd>
-</dl>
-<p class="last">って打つだけ。ね？　簡単でしょ？</p>
-</div>
-<p>そういえばその文字表示に関しての解説ね。</p>
-<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 97
- 98
- 99
-100</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># 得点表示</span>
-<span class="n">score_font</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">font</span><span class="o">.</span><span class="n">SysFont</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="mi">80</span><span class="p">)</span>
-<span class="n">score</span> <span class="o">=</span> <span class="n">score_font</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="s2">&quot;{0:0&gt;4d}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">score</span><span class="p">),</span> <span class="bp">False</span><span class="p">,</span> <span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">))</span>
-<span class="n">screen</span><span class="o">.</span><span class="n">blit</span><span class="p">(</span><span class="n">score</span><span class="p">,</span> <span class="p">(</span><span class="n">SCR_RECT</span><span class="o">.</span><span class="n">left</span><span class="p">,</span> <span class="n">SCR_RECT</span><span class="o">.</span><span class="n">top</span><span class="p">))</span>
-</pre></div>
-</td></tr></table></div>
-<p>特に特殊な事をやってるように見えるここをあえて抽出。</p>
-<p>98行目は、フォント（書体）をゲームの中で使えるように読み込んでいる処理。</p>
-<p>99行目が一番やっかいだね。これは文字起こしをしているわけだけど、また謎の呪文見たいのが出てきたと思ってる？</p>
-<p><code class="docutils literal"><span class="pre">&quot;{0:0&gt;4d}&quot;.format(self.score)</span></code> は何をやっているかというと、これもコンピューターに通じる言葉で、
-フォーマット（書式ともいう）を指定している。詳しく見てみよう。</p>
-<div class="line-block">
-<div class="line"><code class="docutils literal"><span class="pre">{0}</span></code> と書くだけで、その後ろの <code class="docutils literal"><span class="pre">format(self.score)</span></code> と関連付けして、</div>
-<div class="line">「self.scoreを文字列にして表示しなさい」</div>
-<div class="line">という指示になる。</div>
-</div>
-<div class="line-block">
-<div class="line">ここにさらに <code class="docutils literal"><span class="pre">:0&gt;4d</span></code> と書くことで</div>
-<div class="line">「0で4つ埋めた表示にしなさい」</div>
-<div class="line">って指示をしているわけだ。</div>
-</div>
-<p>この辺り詳しく知りたい人は、Pythonの公式ドキュメントの <a class="reference external" href="http://docs.python.jp/3/library/string.html#formatspec">6.1.3. 書式指定文字列の文法</a> を見るといいよ。</p>
-</div>
-<div class="section" id="id6">
-<h2>ゲーム画面<a class="headerlink" href="#id6" title="このヘッドラインへのパーマリンク">¶</a></h2>
-<p>ということで、早速出来上がったゲーム画面を見てみよう。</p>
-<img alt="スタート画面" src="../../_images/004.png" />
-<p>お、</p>
-<img alt="プレイ画面" src="../../_images/005.png" />
-<p>おおぉ！</p>
-<img alt="../../_images/006.png" src="../../_images/006.png" />
-<p>おおぅ！</p>
-<p>画像で見ても感動が伝わらないので、ぜひNinja諸君には自身でコーディングしてこの感動を味わって欲しい！</p>
+<p>試しに作ったプログラムでスペースキーを押してご覧よ。</p>
 </div>
 </div>
 
@@ -697,11 +537,10 @@
         <div class="sphinxsidebarwrapper">
   <h3><a href="../../index.html">目次</a></h3>
   <ul>
-<li><a class="reference internal" href="#">色々ゲームにする。 - タイトル画面・ゲームオーバー画面・得点表示</a><ul>
+<li><a class="reference internal" href="#">「これを使えっ！」 - プレイヤーキャラクター、レーザーを放つ。</a><ul>
 <li><a class="reference internal" href="#id2">まえがき</a></li>
 <li><a class="reference internal" href="#id3">ソースコード</a></li>
 <li><a class="reference internal" href="#id4">解説</a></li>
-<li><a class="reference internal" href="#id6">ゲーム画面</a></li>
 </ul>
 </li>
 </ul>
@@ -709,17 +548,13 @@
 <h3>Related Topics</h3>
 <ul>
   <li><a href="../../index.html">Documentation overview</a><ul>
-  <li><a href="00_pygame.html">Pythonでゲームを作りますが、何か of Python3</a><ul>
-      <li>Previous: <a href="05_move_enemy.html" title="前の章へ">「こいつら、動くぞ？！」 - 敵を表示させて動かしてみる。</a></li>
-      <li>Next: <a href="08_file_separate.html" title="次の章へ">最後の大掃除 - ソースを綺麗に、分割しちゃうぞ！</a></li>
-  </ul></li>
   </ul></li>
 </ul>
 </div>
   <div role="note" aria-label="source link">
     <h3>このページ</h3>
     <ul class="this-page-menu">
-      <li><a href="../../_sources/python/pygame/07_game_status.rst.txt"
+      <li><a href="../../_sources/python/pygame/06_lazer.rst.txt"
             rel="nofollow">ソースコードを表示</a></li>
     </ul>
    </div>
@@ -745,7 +580,7 @@
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
       
       |
-      <a href="../../_sources/python/pygame/07_game_status.rst.txt"
+      <a href="../../_sources/python/pygame/06_lazer.rst.txt"
           rel="nofollow">Page source</a>
     </div>
 

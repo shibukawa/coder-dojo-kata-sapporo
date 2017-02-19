@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>あとがき &#8212; Coder Dojo Sapporo Kata 0.0.1 ドキュメント</title>
+    <title>この次は？ &#8212; Coder Dojo Sapporo Kata 0.1.0 ドキュメント</title>
     
     <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -15,7 +15,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '0.0.1',
+        VERSION:     '0.1.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -28,6 +28,8 @@
     <script type="text/javascript" src="../../_static/translations.js"></script>
     <link rel="index" title="索引" href="../../genindex.html" />
     <link rel="search" title="検索" href="../../search.html" />
+    <link rel="next" title="ギットギトのソースコードをGitで管理する" href="../../tips/git.html" />
+    <link rel="prev" title="最後の大掃除 - ソースを綺麗に、分割しちゃうぞ！" href="08_file_separate.html" />
    
   <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
   
@@ -44,7 +46,38 @@
           <div class="body" role="main">
             
   <div class="section" id="id1">
-<h1>あとがき<a class="headerlink" href="#id1" title="このヘッドラインへのパーマリンク">¶</a></h1>
+<h1>この次は？<a class="headerlink" href="#id1" title="このヘッドラインへのパーマリンク">¶</a></h1>
+<p>さて、これで君はPythonという言語でゲームを作れるようになった。このゲームを改造して爆発エフェクトを追加したり、
+BGMや効果音をつけたり、あるいはレーザーを拡散させたって構わない。</p>
+<p>更に言うと、全く別のゲームを作り始めても構わない。RPGでも構わないし、サウンドノベルでも全く問題ない。</p>
+<p>もしできるのなら、2DのMinecraftのような、オープンワールドゲームを作ったって構わない。</p>
+<p>もしもっと腕に自信があるのなら、 <a class="reference external" href="https://www.panda3d.org/">Panda3D</a> で3Dのゲームに挑戦してもいいだろう。</p>
+<hr class="docutils" />
+<p>Pythonが嫌だった？　なるほど、君はそういうNinjaなんだね。</p>
+<p>であれば他のゲームエンジンを使ってみるのも一つだ。</p>
+<p>例えば最近これを書いているメンターがハマった <a class="reference external" href="http://magniflop.com/st">Strange Telephone</a> というゲームは <a class="reference external" href="https://love2d.org/">LÖVE - Free 2D Game Engine</a>
+というゲームエンジンを使っているし、日本製でユニークなものとしては <a class="reference external" href="http://www.starruby.info/ja/">Star Ruby</a> という <a class="reference external" href="http://www.ruby-lang.org/ja/">Ruby</a> 用のゲームエンジンもある。</p>
+<p>最近は個人製作であれば（売り物を作るわけでなければ）無料で使える3Dゲームエンジンもある。
+主に <a class="reference external" href="https://unity3d.com/jp/unity">Unity</a> や　<a class="reference external" href="https://www.unrealengine.com/ja/what-is-unreal-engine-4">Unreal Engine</a> だが、完全無料でオープンソースという観点では、
+<a class="reference external" href="https://www.blender.org/">Blender</a> もある。（ただし現時点（2017年02月19日現在）では最新のレンダリングエンジンによるゲーム開発は
+できない様子。）</p>
+<p>もっとも、もっと腕に自信があるのなら、今だったらC++を学んでC++対応のゲームエンジンでゲームを作ると、
+ハイパフォーマンスのゲームはできるかもしれないし、むしろ <a class="reference external" href="http://dlang.org/">D</a> や　<a class="reference external" href="https://golang.org/">Go</a> や <a class="reference external" href="https://www.rust-lang.org/en-US/">Rust</a> それに <a class="reference external" href="https://nim-lang.org/index.html">Nim</a> と言った
+マイナー言語で1からゲームエンジンを作り、そしてゲームを作るのだって構わない。 <a class="reference external" href="https://www.libsdl.org/">SDL</a> を叩いて色々できるものが
+作れれば、それこそクロスプラットフォーム（Windows, macOS, Linux, iOS, Android)ゲームを作れる。</p>
+<p>ああ、コンシューマー機（Nintendo Switch, PS4, XBOX ONE, etc...)だと、やはり選択肢は限られて、
+<a class="reference external" href="https://unity3d.com/jp/unity">Unity</a> や <a class="reference external" href="https://www.unrealengine.com/ja/what-is-unreal-engine-4">Unreal Engine</a> を使ったほうがいいだろう。</p>
+<p>とあれこれ言ったが、やっぱりPythonはいい言語である。 Pythonの宣伝文句をもう少し唱っておくなら、
+有名ドコロの3Dグラフィック編集ソフト（ <a class="reference external" href="http://www.autodesk.co.jp/products/maya/overview">Maya</a> , <a class="reference external" href="https://www.blender.org/">Blender</a> ）のスクリプト言語としても使えるし、
+最近だとAIとかと一緒にされる深層学習や機械学習のライブラリも結構あるわけで、割と楽しい世界が広がってる
+と、この記事を書いているメンターは思う。</p>
+<p>Pythonは好きだがPygameが嫌？　まあ、この文章を読んでくれ。</p>
+<p><a class="reference external" href="http://www.unixuser.org/~euske/doc/pygame/newbieguide-j.html">初心者のためのpygameガイド</a></p>
+<hr class="docutils" />
+<p>ゲームに使う素材を作りたいのであれば、また今度お話しよう。</p>
+</div>
+<div class="section" id="id2">
+<h1>あとがき<a class="headerlink" href="#id2" title="このヘッドラインへのパーマリンク">¶</a></h1>
 <p>実はPythonでゲームを作ったのは今回が初めてです。
 なので、最初のソースコードと最後に出来上がったソースコードが全く違うものになっていると思います。</p>
 <p>でもそれでいいと思います。
@@ -60,10 +93,20 @@
         </div>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper"><div class="relations">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">目次</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">この次は？</a></li>
+<li><a class="reference internal" href="#id2">あとがき</a></li>
+</ul>
+<div class="relations">
 <h3>Related Topics</h3>
 <ul>
   <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="00_pygame.html">Pythonでゲームを作りますが、何か of Python3</a><ul>
+      <li>Previous: <a href="08_file_separate.html" title="前の章へ">最後の大掃除 - ソースを綺麗に、分割しちゃうぞ！</a></li>
+      <li>Next: <a href="../../tips/git.html" title="次の章へ">ギットギトのソースコードをGitで管理する</a></li>
+  </ul></li>
   </ul></li>
 </ul>
 </div>
