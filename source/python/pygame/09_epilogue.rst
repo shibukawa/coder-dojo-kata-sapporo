@@ -58,6 +58,10 @@ Pythonは好きだがPygameが嫌？　まあ、この文章を読んでくれ�
 .. _Maya: http://www.autodesk.co.jp/products/maya/overview
 .. _`初心者のためのpygameガイド`: http://www.unixuser.org/~euske/doc/pygame/newbieguide-j.html
 
+---------------------------------------------
+
+ゲームに使う素材を作りたいのであれば、また今度お話しよう。
+
 あとがき
 ======================
 
