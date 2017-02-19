@@ -1,0 +1,172 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>コンパイラ・インタプリタと友達になる &#8212; Coder Dojo Sapporo Kata 0.0.1 ドキュメント</title>
+    
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/background.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="検索" href="../search.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="id1">
+<h1>コンパイラ・インタプリタと友達になる<a class="headerlink" href="#id1" title="このヘッドラインへのパーマリンク">¶</a></h1>
+<div class="section" id="id2">
+<h2>やいのやいの言われるのが面倒くさいが<a class="headerlink" href="#id2" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>コンパイラはなぜ一字一句うるさいのか。</p>
+<p>とてつもなく面倒くさい。</p>
+<p>そう思ったことはないだろうか。</p>
+<p>いっそのこと、もっと利口になってくれないか。</p>
+<p>そんなあなたにちょっと試して欲しいコーディング方法がある。</p>
+</div>
+<div class="section" id="id3">
+<h2>試しに<a class="headerlink" href="#id3" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<div class="section" id="id4">
+<h3>おもむろに欲しいクラス・関数の名前を書く<a class="headerlink" href="#id4" title="このヘッドラインへのパーマリンク">¶</a></h3>
+</div>
+<div class="section" id="id5">
+<h3>コンパイラ・インタプリタに怒られますね<a class="headerlink" href="#id5" title="このヘッドラインへのパーマリンク">¶</a></h3>
+</div>
+<div class="section" id="id6">
+<h3>「オーケー、デイジー。そのクラス実装すれば良いんだろ？」<a class="headerlink" href="#id6" title="このヘッドラインへのパーマリンク">¶</a></h3>
+</div>
+<div class="section" id="id7">
+<h3>おもむろにクラスに欲しい機能・メソッドの名前を書く<a class="headerlink" href="#id7" title="このヘッドラインへのパーマリンク">¶</a></h3>
+</div>
+<div class="section" id="id8">
+<h3>「オーケー、デイジー。その機能とかメソッドを実装すれば良いんだろ？」<a class="headerlink" href="#id8" title="このヘッドラインへのパーマリンク">¶</a></h3>
+</div>
+<div class="section" id="id9">
+<h3>おもむろに機能やメソッドに欲しい変数やデータを作る<a class="headerlink" href="#id9" title="このヘッドラインへのパーマリンク">¶</a></h3>
+</div>
+<div class="section" id="id10">
+<h3>コンパイラ・インタプリタに怒られますね<a class="headerlink" href="#id10" title="このヘッドラインへのパーマリンク">¶</a></h3>
+</div>
+<div class="section" id="id11">
+<h3>「オーケー、デイジー。その変数に適切なデータを入れればいいんだろ？」<a class="headerlink" href="#id11" title="このヘッドラインへのパーマリンク">¶</a></h3>
+</div>
+<div class="section" id="id12">
+<h3>うごく。が、期待通りではない。<a class="headerlink" href="#id12" title="このヘッドラインへのパーマリンク">¶</a></h3>
+</div>
+<div class="section" id="id13">
+<h3>「サンキュー、デイジー。おまえのおかげで良いプログラムが書けそうだ」<a class="headerlink" href="#id13" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>ここからは自分との戦いである。まさに。</p>
+</div>
+</div>
+<div class="section" id="id14">
+<h2>つまりどういうことか<a class="headerlink" href="#id14" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>コンパイラ・インタプリタは足りないものを指摘してるだけ。それにカッカしないで、むしろ利用しまくる。</p>
+</div>
+<div class="section" id="smalltalk">
+<h2>この体験はSmalltalkで実感できる<a class="headerlink" href="#smalltalk" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>やってみよう。</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">目次</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">コンパイラ・インタプリタと友達になる</a><ul>
+<li><a class="reference internal" href="#id2">やいのやいの言われるのが面倒くさいが</a></li>
+<li><a class="reference internal" href="#id3">試しに</a><ul>
+<li><a class="reference internal" href="#id4">おもむろに欲しいクラス・関数の名前を書く</a></li>
+<li><a class="reference internal" href="#id5">コンパイラ・インタプリタに怒られますね</a></li>
+<li><a class="reference internal" href="#id6">「オーケー、デイジー。そのクラス実装すれば良いんだろ？」</a></li>
+<li><a class="reference internal" href="#id7">おもむろにクラスに欲しい機能・メソッドの名前を書く</a></li>
+<li><a class="reference internal" href="#id8">「オーケー、デイジー。その機能とかメソッドを実装すれば良いんだろ？」</a></li>
+<li><a class="reference internal" href="#id9">おもむろに機能やメソッドに欲しい変数やデータを作る</a></li>
+<li><a class="reference internal" href="#id10">コンパイラ・インタプリタに怒られますね</a></li>
+<li><a class="reference internal" href="#id11">「オーケー、デイジー。その変数に適切なデータを入れればいいんだろ？」</a></li>
+<li><a class="reference internal" href="#id12">うごく。が、期待通りではない。</a></li>
+<li><a class="reference internal" href="#id13">「サンキュー、デイジー。おまえのおかげで良いプログラムが書けそうだ」</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id14">つまりどういうことか</a></li>
+<li><a class="reference internal" href="#smalltalk">この体験はSmalltalkで実感できる</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>このページ</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/tips/programmer_friends.rst.txt"
+            rel="nofollow">ソースコードを表示</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>クイック検索</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="検索" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;CC BY-NC-SA 2017, TAKAHASHI Hidetsugu.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+      |
+      <a href="../_sources/tips/programmer_friends.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

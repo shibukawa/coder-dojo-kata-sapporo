@@ -1,0 +1,163 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Pythonでゲームを作りますが、何か of Python3 &#8212; Coder Dojo Sapporo Kata 0.0.1 ドキュメント</title>
+    
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/background.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/translations.js"></script>
+    <link rel="index" title="索引" href="../../genindex.html" />
+    <link rel="search" title="検索" href="../../search.html" />
+    <link rel="next" title="環境構築" href="01_environment.html" />
+    <link rel="prev" title="Welcome to Coder Dojo Sapporo Kata documentation!" href="../../index.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="python-of-python3">
+<h1>Pythonでゲームを作りますが、何か of Python3<a class="headerlink" href="#python-of-python3" title="このヘッドラインへのパーマリンク">¶</a></h1>
+<div class="section" id="id1">
+<h2>目的<a class="headerlink" href="#id1" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>簡単なシューティングゲームを作って、Pythonに馴染んてもらう。</p>
+<div class="admonition note">
+<p class="first admonition-title">注釈</p>
+<p class="last">元ネタは <a class="reference external" href="http://aidiary.hatenablog.com/entry/20080507/1269694935">Pythonでゲーム作りますが何か？ - 人工知能に関する断創録</a> です。</p>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">警告</p>
+<p>この資料はPythonの基本文法をすっ飛ばしていますので、Pythonの基本文法に関しては、
+<a class="reference external" href="http://diveintopython3-ja.rdy.jp/">Dive into Python3</a> もしくは <a class="reference external" href="http://docs.python.jp/3/tutorial/">Pythonチュートリアル</a> （こちらのほうが詳しいです） をお読みいただけると幸いです。</p>
+<p>またこのKataではコマンド操作を必要としますので、最低限以下のコマンド操作を伝授させてください。</p>
+<ul class="last simple">
+<li>cd （ディレクトリ移動(Windowsでは引数なしの場合、現在ディレクトリのパス表示)）</li>
+<li>dir （現在ディレクトリの内容を表示）</li>
+<li>pwd （macOS, Linuxの場合の現在ディレクトリのパス表示）</li>
+<li>ls （macOS, Linuxの場合の現在ディレクトリの内容を表示）</li>
+</ul>
+</div>
+<div class="admonition tip">
+<p class="first admonition-title">ちなみに</p>
+<p class="last">伝授する際のコツは、書くキーワードがScratchなどの何に対応するのかを伝えながらだと、わかりやすいかもしれません。</p>
+</div>
+</div>
+<div class="section" id="id3">
+<h2>用意するもの<a class="headerlink" href="#id3" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<ul class="simple">
+<li>Python3 (Windows, Mac, Linux)</li>
+<li>Pygame</li>
+<li>Pythonのソースコードが編集できるエディタ（Atom推奨。PyCharmでも可）</li>
+<li>（できれば）ゲームに使う画像・音楽素材。</li>
+</ul>
+</div>
+<div class="section" id="id4">
+<h2>カリキュラム（？）<a class="headerlink" href="#id4" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<div class="toctree-wrapper compound">
+<p class="caption"><span class="caption-text">目次</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="01_environment.html">環境構築</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_view_window.html">やってみよう</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_make_sprite.html">スプライトを作る</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_inherich.html">「俺はこれから本気出す」 - プレイヤー・キャラクター、動く。</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_move_enemy.html">「こいつら、動くぞ？！」 - 敵を表示させて動かしてみる。</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_razor.html">「これを使えっ！」 - プレイヤーキャラクター、レーザーを放つ。</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_game_status.html">色々ゲームにする。 - タイトル画面・ゲームオーバー画面・得点表示</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08_file_separate.html">最後の大掃除 - ソースを綺麗に、分割しちゃうぞ！</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09_epilogue.html">あとがき</a></li>
+</ul>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">目次</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Pythonでゲームを作りますが、何か of Python3</a><ul>
+<li><a class="reference internal" href="#id1">目的</a></li>
+<li><a class="reference internal" href="#id3">用意するもの</a></li>
+<li><a class="reference internal" href="#id4">カリキュラム（？）</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="../../index.html" title="前の章へ">Welcome to Coder Dojo Sapporo Kata documentation!</a></li>
+      <li>Next: <a href="01_environment.html" title="次の章へ">環境構築</a></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>このページ</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/python/pygame/00_pygame.rst.txt"
+            rel="nofollow">ソースコードを表示</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>クイック検索</h3>
+    <form class="search" action="../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="検索" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;CC BY-NC-SA 2017, TAKAHASHI Hidetsugu.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+      |
+      <a href="../../_sources/python/pygame/00_pygame.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
