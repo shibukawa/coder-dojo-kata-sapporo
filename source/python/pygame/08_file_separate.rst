@@ -50,7 +50,7 @@ load_image
 .. caution::
     しれっと *Razor* とスペルミスしてるのを *lazer* と直してます。
 
-    そしてload_image関数は ``toothpick.py`` ファイルに移しました。
+    そして ``load_image`` 関数は ``toothpick.py`` ファイルに移しました。
 
 ちなみに ``main.py`` の中身ですが、現段階では::
     if __name__ == '__main__':
