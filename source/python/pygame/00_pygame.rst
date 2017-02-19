@@ -41,6 +41,8 @@ Pythonでゲームを作りますが、何か of Python3
 
 .. toctree::
     :maxdepth: 1
+    :caption: 目次
+
     01_environment
     02_view_window
     03_make_sprite

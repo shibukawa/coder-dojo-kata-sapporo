@@ -3,7 +3,7 @@
 
 ということで君にはこのレーザーを渡そう。
 
-.. image:: img/game/lazer.png
+.. image:: img/lazer.png
    :alt: なんも変哲もない黄色い棒
 
 | え、なに？

@@ -15,9 +15,10 @@ Welcome to Coder Dojo Sapporo Kata documentation!
    :maxdepth: 2
    :caption: Contents:
 
-   python/00_pygame
+   python/pygame/00_pygame
    tips/git
    tips/programmer_friends
+
 
 参考資料
 --------------------
